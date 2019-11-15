@@ -3,6 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB; 
+use \Firebase\JWT\JWT;
 Use App\books;
 
 class users extends Model
@@ -13,7 +17,66 @@ class users extends Model
 
     public function books()
     {
-        return $this->belongsToMany(books::class, 'users_borrow_books', 'user_id','book_id')->withTimestamps();
+        return $this->belongsToMany('App\books', 'users_borrow_books', 'user_id','book_id')->withTimestamps();
     }
+
+    public function register(Request $request) {
+
+        $user = new self();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        $user->save();
+
+        $token = $this->getTokenbyUser($user);
+
+        return $token;
+
+    }
+
+    public function login(Request $request){
+        try {
+            $user = $this->getuserbyEmail($request->email);
+        } catch (\Throwable $th) {
+            return 204;
+        }
+        
+
+            if ($user->password == $request->password) {
+           
+                return $user;
+            } else {
+                return 204;
+ 
+        }
+
+
+    }
+
+
+
+    private function getuserbyEmail($email)
+    {
+
+        $user = users::findOrFail(DB::table('users')
+        ->where('email', $email)
+        ->select('users.*')->first()->id);
+
+        return $user;
+   
+    }
+
+    private function getuserbyId($id)
+    {
+        $user = users::findOrFail(DB::table('users')
+        ->where('id', $id)
+        ->select('users.*')->first()->id);
+
+        return $user;
+
+    }
+
 
 }

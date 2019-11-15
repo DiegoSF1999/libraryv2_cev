@@ -13,7 +13,7 @@ class books extends Model
 
     public function users()
     {
-        return $this->belongsToMany(users::class, 'users_borrow_books', 'book_id','user_id')->withTimestamps();
+        return $this->belongsToMany('App\users', 'users_borrow_books', 'book_id','user_id')->withTimestamps();
     }
 
 }

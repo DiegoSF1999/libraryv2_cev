@@ -38,43 +38,21 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        users::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
 
-        $user = users::findOrFail(DB::table('users')
-        ->where('email', $request->email)
-        ->where('password', $request->password)
-
-        ->select('users.*')->first()->id);
-
-        $key = $user->password;
-        $data_token = $user->email;
-
-        $token = JWT::encode($data_token, $key);
-        return response()->json([
-            'token' => $token
-        ],201);
+        $users = new Users();
+        $user_token = $users->register($request);
+        
+        return $user_token;
 
     }
 
     public function login(Request $request)
     {
-        try {
-            $user = users::findOrFail(DB::table('users')
-            ->where('email', $request->email)
-            ->where('password', $request->password)
-    
-            ->select('users.*')->first()->id);
-        } catch (\Throwable $th) {
-            return 401;
-            exit;
-        }
 
+        $users = new Users();
 
-   
+        $user = $users->login($request);
+
         $key = $user->password;
         $data_token = $user->email;
 
@@ -82,7 +60,7 @@ class UsersController extends Controller
 
         return response()->json([
             'token' => $token
-        ],201);
+        ],401);
   
 
 
@@ -120,6 +98,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $user = users::findOrFail($id);
         
         $user->name = $request->name;
