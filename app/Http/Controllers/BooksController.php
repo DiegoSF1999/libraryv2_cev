@@ -35,10 +35,11 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        books::create([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
+        $books = new Books();
+
+        $book = $books->register($request);
+
+        return $book;
     }
 
     /**
@@ -62,6 +63,16 @@ class BooksController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $books = new Books();
+
+        $book = $books->getbookbytitle($request->title);
+
+        return $book;
+    }
+
 
     /**
      * Update the specified resource in storage.

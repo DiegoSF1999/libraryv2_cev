@@ -30,6 +30,9 @@ Route::GET('prueba', function(){
     return 1;
 });
 
+Route::POST('search', 'BooksController@search');
+
+
 // Route::GET('borrows', function(){
 //         $user = users::findOrFail(1);
        

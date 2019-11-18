@@ -78,5 +78,23 @@ class users extends Model
 
     }
 
+    public function getTokenbyuser($user){
+
+        $key = $user->password;
+        $data_token = $user->email;
+
+        $token = JWT::encode($data_token, $key);
+
+        return $token;
+
+    }
+
+    public function getdecodedtoken($token, $user)
+    {
+        $decoded = JWT::decode($token, $user->password, array('HS256'));
+        
+        return $decoded;
+    }
+
 
 }

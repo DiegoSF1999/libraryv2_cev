@@ -53,14 +53,17 @@ class UsersController extends Controller
 
         $user = $users->login($request);
 
-        $key = $user->password;
-        $data_token = $user->email;
+        try {
 
-        $token = JWT::encode($data_token, $key);
+            $token = $users->getTokenbyuser($user);
 
         return response()->json([
             'token' => $token
-        ],401);
+        ],201);
+        } catch (\Throwable $th) {
+            return 204;
+        }
+        
   
 
 
