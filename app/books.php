@@ -35,6 +35,7 @@ class books extends Model
 
     public function getbookbytitle($title){
 
+
         $book = books::findOrFail(DB::table('books')->where('title', $title)
         ->first()->id);
        

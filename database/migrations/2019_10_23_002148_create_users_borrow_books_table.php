@@ -14,7 +14,7 @@ class CreateUsersBorrowBooksTable extends Migration
     public function up()
     {
         Schema::create('users_borrow_books', function (Blueprint $table) {
-            $table->primary('user_id', 'book_id');
+            $table->primary(['user_id', 'book_id']);
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('book_id');
             $table->foreign('user_id')->references('id')->on('users');

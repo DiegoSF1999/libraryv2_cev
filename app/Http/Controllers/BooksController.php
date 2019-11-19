@@ -67,10 +67,17 @@ class BooksController extends Controller
     public function search(Request $request)
     {
         $books = new Books();
+        try {
+                $book = $books->getbookbytitle($request->title);
+                return $book;
 
-        $book = $books->getbookbytitle($request->title);
+            } catch (\Throwable $th) {
+                return 204;
 
-        return $book;
+}
+        
+
+        
     }
 
 
