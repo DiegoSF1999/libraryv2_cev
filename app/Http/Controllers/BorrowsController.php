@@ -42,11 +42,7 @@ class BorrowsController extends Controller
     public function store(Request $request)
     {
 
-        $user = users::findOrFail($request->user_id);
-        $user->books()->attach($request->book_id);
 
-
-        return $user->books;
 
     }
 

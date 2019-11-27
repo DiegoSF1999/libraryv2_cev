@@ -57,7 +57,7 @@ class users extends Model
 
 
 
-    private function getuserbyEmail($email)
+    public function getuserbyEmail($email)
     {
 
         $user = users::findOrFail(DB::table('users')
@@ -81,7 +81,7 @@ class users extends Model
     public function getTokenbyuser($user){
 
         $key = $user->password;
-        $data_token = $user->email;
+        $data_token = $user->email . $user->password;
 
         $token = JWT::encode($data_token, $key);
 
@@ -89,12 +89,14 @@ class users extends Model
 
     }
 
-    public function getdecodedtoken($token, $user)
+    public function getdecodedtoken($token, $key)
     {
-        $decoded = JWT::decode($token, $user->password, array('HS256'));
+        $decoded = JWT::decode($token, $key, array('HS256'));
         
         return $decoded;
     }
 
+    
+    
 
 }

@@ -32,6 +32,8 @@ Route::GET('prueba', function(){
 
 Route::POST('search', 'BooksController@search');
 
+Route::POST('borrow', 'UsersController@setBorrow')->middleware('token');
+
 
 // Route::GET('borrows', function(){
 //         $user = users::findOrFail(1);

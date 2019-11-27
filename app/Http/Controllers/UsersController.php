@@ -37,12 +37,14 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {       
 
         $users = new Users();
         $user_token = $users->register($request);
         
-        return $user_token;
+        return response()->json([
+            'token' => $token
+        ],201);
 
     }
 
@@ -61,7 +63,7 @@ class UsersController extends Controller
             'token' => $token
         ],201);
         } catch (\Throwable $th) {
-            return 204;
+            return 401;
         }
         
   
@@ -124,6 +126,15 @@ class UsersController extends Controller
         users::find($id)->delete();
 
         return 'deleted';
+    }
+
+    public function setBorrow($request)
+    {
+        $user = users::findOrFail($request->user_id);
+        $user->books()->attach($request->book_id);
+
+
+        return $user->books;
     }
 
   
