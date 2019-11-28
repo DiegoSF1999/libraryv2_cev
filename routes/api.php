@@ -19,20 +19,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResources([
-    'users' => 'UsersController',
-    'books' => 'BooksController',
-    'borrows' => 'BorrowsController'
-]);
 
-Route::POST('login', 'UsersController@login');
+Route::apiResource('users', 'UsersController')->middleware('CheckToken');
+Route::apiResource('books', 'BooksController')->middleware('CheckToken');
+Route::apiResource('borrows', 'BorrowsController')->middleware('CheckToken');
+    
+Route::GET('users', 'UsersController@index')->middleware('None');
+Route::GET('books', 'BooksController@index')->middleware('None');
+Route::POST('users', 'UsersController@store')->middleware('None');
+
+Route::POST('login', 'UsersController@login')->middleware('None');
 Route::GET('prueba', function(){
     return 1;
 });
 
-Route::POST('search', 'BooksController@search');
+Route::POST('search', 'BooksController@search')->middleware('None');
 
-Route::POST('borrow', 'UsersController@setBorrow')->middleware('token');
+Route::POST('borrow', 'UsersController@setBorrow')->middleware('CheckToken');
 
 
 // Route::GET('borrows', function(){

@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <style>
+  th {
+    padding-bottom: 20px;
+     }
+
+     .uno {
+        width: 70px;
+        height: 65px;
+     }
+
+  </style>
+
+</head>
+
+<body>
+
+  <script src="js/scripts.js"></script>
+
+  <div align="center" style="margin-top: 17%">
+
+    <h1>NUEVO USUARIO</h1>
+
+    <form action="http://127.0.0.1:8888/Diego/library/public/index.php/api/users" method="post">
+  
+        <table>
+                <tr>
+                  <th>Username</th>
+                  <th><input type="text" name="name"></th> 
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <th><input type="text" name="email"></th> 
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <th><input type="password" name="password"></th> 
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input type="submit" value="Send" class="uno"></th>
+                </tr>
+
+              </table>
+    </form>
+
+</div>
+
+
+</body>
+</html>

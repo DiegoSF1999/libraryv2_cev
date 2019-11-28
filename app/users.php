@@ -83,13 +83,33 @@ class users extends Model
         $key = $user->password;
         $data_token = $user->email . $user->password;
 
-        $token = JWT::encode($data_token, $key);
+        $token1 = JWT::encode($data_token, $key);
+
+        $token2 = JWT::encode($data_token, $token1);
+
+        $data_token = $token1;
+
+        $token3 = JWT::encode($data_token, $token2);
+
+        $data_token = $token2;
+
+        $token4 = JWT::encode($data_token, $token3);
+
+        $data_token = $token3;
+
+        $token5 = JWT::encode($data_token, $token4);
+
+        $data_token = $token4;
+
+        $token6 = JWT::encode($data_token, $token5);
+
+        $token = JWT::encode($token5, $token6 . $token5 . $token4 . $token3 . $token2);
 
         return $token;
 
     }
 
-    public function getdecodedtoken($token, $key)
+    public function getdecodedtoken($token, $key)       //FUNCION OBSOLETA
     {
         $decoded = JWT::decode($token, $key, array('HS256'));
         

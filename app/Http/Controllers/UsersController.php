@@ -43,7 +43,7 @@ class UsersController extends Controller
         $user_token = $users->register($request);
         
         return response()->json([
-            'token' => $token
+            'token' => $user_token
         ],201);
 
     }
@@ -128,7 +128,7 @@ class UsersController extends Controller
         return 'deleted';
     }
 
-    public function setBorrow($request)
+    public function setBorrow(Request $request)
     {
         $user = users::findOrFail($request->user_id);
         $user->books()->attach($request->book_id);

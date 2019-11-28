@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use \Firebase\JWT\JWT;
 Use App\users;
+use Illuminate\Http\Request;
 
 class CheckAuth
 {
@@ -26,9 +27,8 @@ class CheckAuth
         $real_token = $users->getTokenbyuser($user);
 
         if($real_token == $checking_token){
-            
-           
-             return $next($request);
+
+          return $next($request);
 
         } else {
             return 403;
