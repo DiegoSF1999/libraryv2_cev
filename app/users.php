@@ -103,7 +103,7 @@ class users extends Model
 
         $token6 = JWT::encode($data_token, $token5);
 
-        $token = JWT::encode($token5, $token6 . $token5 . $token4 . $token3 . $token2);
+        $token = JWT::encode($token5, $token6 . $token5 . $token4 . $token3);
 
         return $token;
 

@@ -90,13 +90,13 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $book = books::findOrFail($id);
+        return $book = books::findOrFail($id);
         
         $book->title = $request->title;
         $book->description = $request->description;
         $book->save();
 
-        return books::findOrFail($id);
+         books::findOrFail($id);
     }
 
     /**

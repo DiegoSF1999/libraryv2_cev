@@ -30,7 +30,8 @@ Route::POST('users', 'UsersController@store')->middleware('None');
 
 Route::POST('login', 'UsersController@login')->middleware('None');
 Route::GET('prueba', function(){
-    return 1;
+    
+    return "datos suculentos";
 });
 
 Route::POST('search', 'BooksController@search')->middleware('None');

@@ -24,37 +24,32 @@
 
 <body>
 
-  <script src="js/scripts.js"></script>
-
   <div align="center" style="margin-top: 17%">
 
     <h1>NUEVO USUARIO</h1>
-
-    <form action="http://127.0.0.1:8888/Diego/library/public/index.php/api/users" method="post">
   
         <table>
                 <tr>
                   <th>Username</th>
-                  <th><input type="text" name="name"></th> 
+                  <th><input type="text" name="name" id="name"></th> 
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <th><input type="text" name="email"></th> 
+                    <th><input type="text" name="email" id="email"></th> 
                 </tr>
                 <tr>
                     <th>Password</th>
-                    <th><input type="password" name="password"></th> 
+                    <th><input type="password" name="password" id="password"></th> 
                 </tr>
                 <tr>
                     <th></th>
-                    <th><input type="submit" value="Send" class="uno"></th>
+                    <th><input type="button" value="Send" class="uno" id="send"></th>
                 </tr>
 
               </table>
-    </form>
 
 </div>
 
-
 </body>
+<script src="scripts.js"></script>
 </html>
